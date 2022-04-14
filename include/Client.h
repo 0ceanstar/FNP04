@@ -8,7 +8,6 @@ class Client
 private:
     int kc;
 
-    // test do nothing
     std::vector<mpz_t> x;
 
     std::vector<mpz_t> a;
