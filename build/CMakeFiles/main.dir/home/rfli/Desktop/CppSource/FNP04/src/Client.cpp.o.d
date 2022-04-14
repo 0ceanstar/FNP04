@@ -1,5 +1,6 @@
-CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/main.cpp.o: \
- /home/rfli/Desktop/CppSource/FNP04/main.cpp /usr/include/stdc-predef.h \
+CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Client.cpp.o: \
+ /home/rfli/Desktop/CppSource/FNP04/src/Client.cpp \
+ /usr/include/stdc-predef.h \
  /home/rfli/Desktop/CppSource/FNP04/build/../include/Client.h \
  /home/rfli/Desktop/CppSource/FNP04/build/../include/Elgamal.h \
  /usr/local/include/gmp.h /usr/include/c++/9/iosfwd \
@@ -157,5 +158,4 @@ CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/main.cpp.o: \
  /usr/include/c++/9/bits/stl_relops.h /usr/include/c++/9/bits/stl_algo.h \
  /usr/include/c++/9/bits/algorithmfwd.h \
  /usr/include/c++/9/bits/stl_heap.h /usr/include/c++/9/bits/stl_tempbuf.h \
- /usr/include/c++/9/bits/uniform_int_dist.h /usr/include/c++/9/limits \
- /home/rfli/Desktop/CppSource/FNP04/build/../include/Server.h
+ /usr/include/c++/9/bits/uniform_int_dist.h /usr/include/c++/9/limits

@@ -14,17 +14,17 @@ void Poly::_get_co(vector<bool> &vis, int cur, int j, mpz_t &t)
             if (!vis[i])
             {
                 mpz_mul(pro, pro, x[i]);
-                mpz_mod(pro, pro, N); //有待考察
+                mpz_mod(pro, pro, p); //有待考察
             }
         }
         //将剩下的直接相乘
         for (int i = cur; i < kc; i++)
         {
             mpz_mul(pro, pro, x[i]);
-            mpz_mod(pro, pro, N); //有待考察
+            mpz_mod(pro, pro, p); //有待考察
         }
         mpz_add(t, t, pro);
-        mpz_mod(t, t, N); //有待考察
+        mpz_mod(t, t, p); //有待考察
         return;
     }
     if (cur == kc)
@@ -40,15 +40,14 @@ void Poly::_get_co(vector<bool> &vis, int cur, int j, mpz_t &t)
     _get_co(vis, cur + 1, j, t);
 }
 
-Poly::Poly(vector<mpz_t> &x) : kc(x.size()), x(kc)
+Poly::Poly(vector<mpz_t> &x, mpz_t mod) : kc(x.size()), x(kc)
 {
-    mpz_init_set_ui(N, 51215902124); //默认的模数，这里是随便设置的
+    mpz_init_set(p, mod); //默认的模数，这里是随便设置的
     for (int i = 0; i < kc; i++)
     {
         mpz_init_set(this->x[i], x[i]);
     }
 }
-
 
 void Poly::get_co(vector<mpz_t> &a)
 {
@@ -104,7 +103,6 @@ void Poly::get_co(vector<mpz_t> &a, const vector<mpz_t> &x)
     }
 }
 
-
 void Poly::sample()
 {
     vector<int> x = {4, 2, 3};
@@ -121,7 +119,11 @@ void Poly::sample()
         mpz_t &cur = xx[i];
         mpz_init_set_si(cur, x[i]);
     }
-    Poly P(xx);
+
+    mpz_t mod;
+    mpz_init_set_ui(mod, 51215902124);
+
+    Poly P(xx, mod);
     vector<bool> vis(kc);
     vector<mpz_t> co(kc + 1);
     P.get_co(co);
@@ -133,10 +135,10 @@ void Poly::sample()
 
 void Poly::set_mod(mpz_t &mod)
 {
-    mpz_init_set(N, mod);
+    mpz_init_set(p, mod);
 }
 
 void Poly::get_mod(mpz_t &mod)
 {
-    mpz_init_set(mod, this->N);
+    mpz_init_set(mod, this->p);
 }

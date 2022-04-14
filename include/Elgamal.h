@@ -66,6 +66,8 @@ public:
         return MESSAGE_SPACE;
     }
 
+    void get_mod(mpz_t &p) { mpz_init_set(p, pk.p); }
+
 private:
     elg_pk pk;
     elg_sk sk;

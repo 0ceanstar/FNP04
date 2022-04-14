@@ -125,12 +125,42 @@ CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/thres_Elgamal.cpp.s: c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/thres_Elgamal.cpp.s"
 	/bin/x86_64-linux-gnu-g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/rfli/Desktop/CppSource/FNP04/src/thres_Elgamal.cpp -o CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/thres_Elgamal.cpp.s
 
+CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Client.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Client.cpp.o: /home/rfli/Desktop/CppSource/FNP04/src/Client.cpp
+CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Client.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rfli/Desktop/CppSource/FNP04/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Client.cpp.o"
+	/bin/x86_64-linux-gnu-g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Client.cpp.o -MF CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Client.cpp.o.d -o CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Client.cpp.o -c /home/rfli/Desktop/CppSource/FNP04/src/Client.cpp
+
+CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Client.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Client.cpp.i"
+	/bin/x86_64-linux-gnu-g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/rfli/Desktop/CppSource/FNP04/src/Client.cpp > CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Client.cpp.i
+
+CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Client.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Client.cpp.s"
+	/bin/x86_64-linux-gnu-g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/rfli/Desktop/CppSource/FNP04/src/Client.cpp -o CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Client.cpp.s
+
+CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Server.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Server.cpp.o: /home/rfli/Desktop/CppSource/FNP04/src/Server.cpp
+CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Server.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rfli/Desktop/CppSource/FNP04/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Server.cpp.o"
+	/bin/x86_64-linux-gnu-g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Server.cpp.o -MF CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Server.cpp.o.d -o CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Server.cpp.o -c /home/rfli/Desktop/CppSource/FNP04/src/Server.cpp
+
+CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Server.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Server.cpp.i"
+	/bin/x86_64-linux-gnu-g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/rfli/Desktop/CppSource/FNP04/src/Server.cpp > CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Server.cpp.i
+
+CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Server.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Server.cpp.s"
+	/bin/x86_64-linux-gnu-g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/rfli/Desktop/CppSource/FNP04/src/Server.cpp -o CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Server.cpp.s
+
 # Object files for target main
 main_OBJECTS = \
 "CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/main.cpp.o" \
 "CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Elgamal.cpp.o" \
 "CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Poly.cpp.o" \
-"CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/thres_Elgamal.cpp.o"
+"CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/thres_Elgamal.cpp.o" \
+"CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Client.cpp.o" \
+"CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Server.cpp.o"
 
 # External object files for target main
 main_EXTERNAL_OBJECTS =
@@ -139,9 +169,11 @@ main: CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/main.cpp.o
 main: CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Elgamal.cpp.o
 main: CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Poly.cpp.o
 main: CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/thres_Elgamal.cpp.o
+main: CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Client.cpp.o
+main: CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Server.cpp.o
 main: CMakeFiles/main.dir/build.make
 main: CMakeFiles/main.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/rfli/Desktop/CppSource/FNP04/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/rfli/Desktop/CppSource/FNP04/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable main"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/main.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -153,6 +153,30 @@ home/rfli/Desktop/CppSource/FNP04/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/main.cpp.s
 .PHONY : home/rfli/Desktop/CppSource/FNP04/main.cpp.s
 
+home/rfli/Desktop/CppSource/FNP04/src/Client.o: home/rfli/Desktop/CppSource/FNP04/src/Client.cpp.o
+.PHONY : home/rfli/Desktop/CppSource/FNP04/src/Client.o
+
+# target to build an object file
+home/rfli/Desktop/CppSource/FNP04/src/Client.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Client.cpp.o
+.PHONY : home/rfli/Desktop/CppSource/FNP04/src/Client.cpp.o
+
+home/rfli/Desktop/CppSource/FNP04/src/Client.i: home/rfli/Desktop/CppSource/FNP04/src/Client.cpp.i
+.PHONY : home/rfli/Desktop/CppSource/FNP04/src/Client.i
+
+# target to preprocess a source file
+home/rfli/Desktop/CppSource/FNP04/src/Client.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Client.cpp.i
+.PHONY : home/rfli/Desktop/CppSource/FNP04/src/Client.cpp.i
+
+home/rfli/Desktop/CppSource/FNP04/src/Client.s: home/rfli/Desktop/CppSource/FNP04/src/Client.cpp.s
+.PHONY : home/rfli/Desktop/CppSource/FNP04/src/Client.s
+
+# target to generate assembly for a file
+home/rfli/Desktop/CppSource/FNP04/src/Client.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Client.cpp.s
+.PHONY : home/rfli/Desktop/CppSource/FNP04/src/Client.cpp.s
+
 home/rfli/Desktop/CppSource/FNP04/src/Elgamal.o: home/rfli/Desktop/CppSource/FNP04/src/Elgamal.cpp.o
 .PHONY : home/rfli/Desktop/CppSource/FNP04/src/Elgamal.o
 
@@ -201,6 +225,30 @@ home/rfli/Desktop/CppSource/FNP04/src/Poly.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Poly.cpp.s
 .PHONY : home/rfli/Desktop/CppSource/FNP04/src/Poly.cpp.s
 
+home/rfli/Desktop/CppSource/FNP04/src/Server.o: home/rfli/Desktop/CppSource/FNP04/src/Server.cpp.o
+.PHONY : home/rfli/Desktop/CppSource/FNP04/src/Server.o
+
+# target to build an object file
+home/rfli/Desktop/CppSource/FNP04/src/Server.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Server.cpp.o
+.PHONY : home/rfli/Desktop/CppSource/FNP04/src/Server.cpp.o
+
+home/rfli/Desktop/CppSource/FNP04/src/Server.i: home/rfli/Desktop/CppSource/FNP04/src/Server.cpp.i
+.PHONY : home/rfli/Desktop/CppSource/FNP04/src/Server.i
+
+# target to preprocess a source file
+home/rfli/Desktop/CppSource/FNP04/src/Server.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Server.cpp.i
+.PHONY : home/rfli/Desktop/CppSource/FNP04/src/Server.cpp.i
+
+home/rfli/Desktop/CppSource/FNP04/src/Server.s: home/rfli/Desktop/CppSource/FNP04/src/Server.cpp.s
+.PHONY : home/rfli/Desktop/CppSource/FNP04/src/Server.s
+
+# target to generate assembly for a file
+home/rfli/Desktop/CppSource/FNP04/src/Server.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Server.cpp.s
+.PHONY : home/rfli/Desktop/CppSource/FNP04/src/Server.cpp.s
+
 home/rfli/Desktop/CppSource/FNP04/src/thres_Elgamal.o: home/rfli/Desktop/CppSource/FNP04/src/thres_Elgamal.cpp.o
 .PHONY : home/rfli/Desktop/CppSource/FNP04/src/thres_Elgamal.o
 
@@ -237,12 +285,18 @@ help:
 	@echo "... home/rfli/Desktop/CppSource/FNP04/main.o"
 	@echo "... home/rfli/Desktop/CppSource/FNP04/main.i"
 	@echo "... home/rfli/Desktop/CppSource/FNP04/main.s"
+	@echo "... home/rfli/Desktop/CppSource/FNP04/src/Client.o"
+	@echo "... home/rfli/Desktop/CppSource/FNP04/src/Client.i"
+	@echo "... home/rfli/Desktop/CppSource/FNP04/src/Client.s"
 	@echo "... home/rfli/Desktop/CppSource/FNP04/src/Elgamal.o"
 	@echo "... home/rfli/Desktop/CppSource/FNP04/src/Elgamal.i"
 	@echo "... home/rfli/Desktop/CppSource/FNP04/src/Elgamal.s"
 	@echo "... home/rfli/Desktop/CppSource/FNP04/src/Poly.o"
 	@echo "... home/rfli/Desktop/CppSource/FNP04/src/Poly.i"
 	@echo "... home/rfli/Desktop/CppSource/FNP04/src/Poly.s"
+	@echo "... home/rfli/Desktop/CppSource/FNP04/src/Server.o"
+	@echo "... home/rfli/Desktop/CppSource/FNP04/src/Server.i"
+	@echo "... home/rfli/Desktop/CppSource/FNP04/src/Server.s"
 	@echo "... home/rfli/Desktop/CppSource/FNP04/src/thres_Elgamal.o"
 	@echo "... home/rfli/Desktop/CppSource/FNP04/src/thres_Elgamal.i"
 	@echo "... home/rfli/Desktop/CppSource/FNP04/src/thres_Elgamal.s"

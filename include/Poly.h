@@ -9,7 +9,7 @@ using namespace std;
 class Poly
 {
 public:
-    Poly(vector<mpz_t> &x);
+    Poly(vector<mpz_t> &x, mpz_t mod);
 
     //计算多项式的系数
     //注意：这里的需要提前声明vector a的大小为 kc+1 否则可能造成错误
@@ -29,6 +29,6 @@ public:
 private:
     int kc; // the size of set x
     vector<mpz_t> x;
-    mpz_t N; // the mod number
+    mpz_t p; // the mod number
     void _get_co(vector<bool> &vis, int cur, int j, mpz_t &t);
 };
