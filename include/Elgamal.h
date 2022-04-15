@@ -68,8 +68,10 @@ public:
 
     void get_mod(mpz_t &p) { mpz_init_set(p, pk.p); }
 
-private:
     elg_pk pk;
     elg_sk sk;
-    static const int MESSAGE_SPACE = 512;
+
+    static const int MESSAGE_SPACE = 128;
+
+    gmp_randstate_t grt;
 };
