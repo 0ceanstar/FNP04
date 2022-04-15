@@ -21,7 +21,7 @@ int main()
     mpz_t p;
     mpz_init_set(p, client.elgamal.pk.p);
 
-    mpz_t enc_co_1;
+    vector<mpz_t> enc_co_1(kc + 1);
     vector<mpz_t> enc_co_2(kc + 1);
 
     client.get_enc_co(enc_co_1, enc_co_2);

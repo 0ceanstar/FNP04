@@ -55,8 +55,6 @@ void Elgamal::elg_enc(mpz_t &c1,
     mpz_init(k);
     mpz_urandomm(k, grt, pk.p);
 
-    gmp_printf("k = %Zd\n\n", k);
-
     mpz_inits(c1, c2, NULL);
 
     mpz_t temp;
