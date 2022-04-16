@@ -45,6 +45,17 @@ public:
     void elg_enc(mpz_t &c1, mpz_t &c2, mpz_t m, elg_pk pk, bool is_random = 1);
 
     /**
+     * @brief Use pk to encrypt messege m, get the ciphertext
+     *
+     * @param c1 elgamal ciphertext_1
+     * @param c2 elgamal ciphertext_2
+     * @param m The messege you want to encrypt
+     * @param pk elgamal public key
+     * @param k
+     */
+    static void elg_enc(mpz_t &c1, mpz_t &c2, mpz_t m, elg_pk pk, mpz_t k);
+
+    /**
      * @brief Use sk to decrypt ciphertext, get recovered messege m
      *
      * @param m recovered messege m

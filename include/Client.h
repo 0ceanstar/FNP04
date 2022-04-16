@@ -17,25 +17,18 @@ private:
     // module
     mpz_t p;
 
+public:
+    Client(std::vector<mpz_t> &x, mpz_t &p);
+
     /**
      * @brief initialize the data x, and get the coefficient of polynomial
      *
      * @param x
      */
-
-public:
-    Elgamal elgamal;
-    Client(std::vector<mpz_t> &x);
     void init(std::vector<mpz_t> &x);
 
-    /**
-     * @brief Get the encrypted coefficient
-     *
-     * @param enc_co_1 elgamal ciphertext c1
-     * @param enc_co_2 size = kc+1, elgamal ciphertext c2
-     * @param co size = kc+1
-     * @param pk elgamal public key
-     */
     void get_enc_co(mpz_t &enc_co_1,
-                    std::vector<mpz_t> &enc_co_2);
+                    std::vector<mpz_t> &enc_co_2,
+                    elg_pk pk,
+                    mpz_t k);
 };
