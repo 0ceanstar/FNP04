@@ -36,6 +36,6 @@ public:
      * @param co size = kc+1
      * @param pk elgamal public key
      */
-    void get_enc_co(std::vector<mpz_t> &enc_co_1,
+    void get_enc_co(mpz_t &enc_co_1,
                     std::vector<mpz_t> &enc_co_2);
 };

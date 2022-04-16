@@ -40,8 +40,9 @@ public:
      * @param c2 elgamal ciphertext_2
      * @param m The messege you want to encrypt
      * @param pk elgamal public key
+     * @param is_random decide if k is random
      */
-    void elg_enc(mpz_t &c1, mpz_t &c2, mpz_t m, elg_pk pk);
+    void elg_enc(mpz_t &c1, mpz_t &c2, mpz_t m, elg_pk pk, bool is_random = 1);
 
     /**
      * @brief Use sk to decrypt ciphertext, get recovered messege m
@@ -74,4 +75,5 @@ public:
     static const int MESSAGE_SPACE = 128;
 
     gmp_randstate_t grt;
+    mpz_t _k;
 };

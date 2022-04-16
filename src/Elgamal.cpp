@@ -7,6 +7,9 @@ Elgamal::Elgamal()
     gmp_randinit_default(grt);
     gmp_randseed_ui(grt, clock());
 
+    mpz_init(_k);
+    mpz_urandomb(_k, grt, MESSAGE_SPACE / 2);
+
     mpz_t q, p, g, g1, g2, x_a, y_a; // define the variables
 
     mpz_init(q);
@@ -48,12 +51,18 @@ Elgamal::Elgamal()
 void Elgamal::elg_enc(mpz_t &c1,
                       mpz_t &c2,
                       mpz_t m,
-                      elg_pk pk)
+                      elg_pk pk,
+                      bool is_random)
 {
 
     mpz_t k;
     mpz_init(k);
     mpz_urandomm(k, grt, pk.p);
+
+    if (!is_random)
+    {
+        mpz_set(k, _k);
+    }
 
     mpz_inits(c1, c2, NULL);
 
@@ -98,7 +107,7 @@ void Elgamal::sample()
     mpz_t c1, c2;
     mpz_inits(c1, c2, NULL);
 
-    E.elg_enc(c1, c2, m, pk);
+    E.elg_enc(c1, c2, m, pk, true);
 
     gmp_printf("c1 = %Zd\n\n", c1);
     gmp_printf("c2 = %Zd\n\n", c2);

@@ -26,11 +26,12 @@ void Client::init(vector<mpz_t> &x)
     // printf("\n");
 }
 
-void Client::get_enc_co(vector<mpz_t> &enc_co_1,
+void Client::get_enc_co(mpz_t &enc_co_1,
                         vector<mpz_t> &enc_co_2)
 {
     for (int i = 0; i < kc + 1; i++)
     {
-        elgamal.elg_enc(enc_co_1[i], enc_co_2[i], a[i], elgamal.pk);
+        // A client must has only one k
+        elgamal.elg_enc(enc_co_1, enc_co_2[i], a[i], elgamal.pk, false);
     }
 }
