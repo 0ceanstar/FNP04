@@ -10,7 +10,7 @@ struct elg_pk
 
 struct elg_sk
 {
-    mpz_t t;
+    mpz_t s;
     mpz_t p, a, b;
 };
 

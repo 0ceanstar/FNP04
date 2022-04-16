@@ -10,7 +10,7 @@ void thres_Elgamal::sample()
     elg_sk sk = el.get_elg_sk();
 
     mpz_t t;
-    mpz_init_set(t, sk.t);
+    mpz_init_set(t, sk.s);
 
     // initialize the random seed
     gmp_randstate_t grt;

@@ -20,6 +20,8 @@ private:
 public:
     Client(std::vector<mpz_t> &x, mpz_t &p);
 
+    Client();
+
     /**
      * @brief initialize the data x, and get the coefficient of polynomial
      *
@@ -31,4 +33,14 @@ public:
                     std::vector<mpz_t> &enc_co_2,
                     elg_pk pk,
                     mpz_t k);
+
+    /**
+     * @brief Set the data and initialize, this function must be called after set_p
+     * 
+     * @param x 
+     */
+    void set_data(vector<mpz_t> &x);
+
+
+    void set_p(mpz_t &p);
 };

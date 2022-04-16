@@ -2,11 +2,10 @@
 
 using namespace std;
 
-Server::Server(std::vector<mpz_t> &y, mpz_t &ti, mpz_t &p)
+Server::Server(std::vector<mpz_t> &y, mpz_t &p)
     : ks(y.size()), y(ks)
 {
     init(y);
-    mpz_init_set(this->ti, ti);
     mpz_init_set(this->p, p);
 }
 

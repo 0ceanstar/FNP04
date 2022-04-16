@@ -42,7 +42,7 @@ Elgamal::Elgamal()
     mpz_init_set(pk.a, g);
     mpz_init_set(pk.b, y_a);
 
-    mpz_init_set(sk.t, x_a);
+    mpz_init_set(sk.s, x_a);
     mpz_init_set(sk.p, p);
     mpz_init_set(sk.a, g);
     mpz_init_set(sk.b, y_a);
@@ -99,7 +99,7 @@ void Elgamal::elg_dec(mpz_t &m,
 {
     mpz_t temp;
     mpz_init(temp);
-    mpz_powm(temp, c1, sk.t, sk.p);
+    mpz_powm(temp, c1, sk.s, sk.p);
     mpz_invert(temp, temp, sk.p);
 
     mpz_mul(temp, temp, c2);
