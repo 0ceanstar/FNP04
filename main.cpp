@@ -37,7 +37,7 @@ int main()
     }
     Server P1(m, PK.p);
 
-    // TODO: initialize P2~PN
+    // initialize P2~PN
     vector<Client *> P2N;
 
     mpz_t MAX;
@@ -59,7 +59,7 @@ int main()
 
     for (int i = 0; i < N; i++)
     {
-        // TODO: P2~PN generate the polynomials respectively
+        // P2~PN generate the polynomials respectively
         Client &cur = *P2N[i];
         mpz_t enc_co_1;
         vector<mpz_t> enc_co_2(SIZE + 1);
@@ -71,7 +71,15 @@ int main()
 
         mpz_clear(k);
 
-        // TODO: P1 use polynomials to calculate data
+        // P1 use polynomials to calculate data
+        vector<mpz_t> enc_data(SIZE);
+        P1.get_enc_data(enc_data, enc_co_2);
+        printf("enc_data is :\n");
+        for (int i = 0; i < SIZE; i++)
+        {
+            gmp_printf("%Zd\t", enc_data[i]);
+        }
+        printf("\n");
     }
 
     // TODO: P1 get the result
