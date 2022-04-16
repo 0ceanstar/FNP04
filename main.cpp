@@ -1,7 +1,7 @@
 #include "Client.h"
 #include "Server.h"
 using namespace std;
-const int N = 3;    // the number of P2~PN
+const int N = 4;    // the number of P2~PN
 const int SIZE = 3; // every party has the same size of data
 
 int main()
@@ -57,6 +57,15 @@ int main()
         P2N.push_back(new Client(y, PK.p));
     }
 
+    // P1's ecrypted value
+    vector<mpz_t> c(SIZE);
+    for (int i = 0; i < SIZE; i++)
+    {
+        mpz_init_set_si(c[i], 0);
+    }
+    mpz_t deno;
+    mpz_init_set_si(deno, 1);
+
     for (int i = 0; i < N; i++)
     {
         // P2~PN generate the polynomials respectively
@@ -67,21 +76,52 @@ int main()
         mpz_init(k);
         mpz_urandomb(k, grt, elgamal.MESSAGE_SPACE);
 
+        // k must be constant value
+        mpz_set_si(k, 10086);
+
         cur.get_enc_co(enc_co_1, enc_co_2, PK, k);
 
+        mpz_t temp;
+        mpz_init(temp);
+        mpz_powm(temp, enc_co_1, s[i], PK.p);
+        mpz_mul(deno, deno, temp);
+        mpz_mod(deno, deno, PK.p);
+
+        mpz_clear(temp);
         mpz_clear(k);
 
         // P1 use polynomials to calculate data
         vector<mpz_t> enc_data(SIZE);
         P1.get_enc_data(enc_data, enc_co_2);
-        printf("enc_data is :\n");
-        for (int i = 0; i < SIZE; i++)
+        printf("enc_data is :");
+        for (int j = 0; j < SIZE; j++)
         {
-            gmp_printf("%Zd\t", enc_data[i]);
+            gmp_printf("%Zd\t", enc_data[j]);
+            mpz_add(c[j], c[j], enc_data[j]);
+            mpz_mod(c[j], c[j], PK.p);
         }
         printf("\n");
     }
+    printf("c is :");
+    for (int i = 0; i < SIZE; i++)
+    {
+        gmp_printf("%Zd\t", c[i]);
+    }
+    printf("\n");
 
     // TODO: P1 get the result
+    mpz_invert(deno, deno, PK.p);
+    for (int i = 0; i < SIZE; i++)
+    {
+        mpz_mul(c[i], c[i], deno);
+        mpz_mod(c[i], c[i], PK.p);
+    }
+    printf("the result is :");
+    for (int i = 0; i < SIZE; i++)
+    {
+        gmp_printf("%Zd\t", c[i]);
+    }
+    printf("\n\n");
+
     return 0;
 }
