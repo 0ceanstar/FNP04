@@ -1,17 +1,22 @@
 #include "Client.h"
 #include "Server.h"
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <cstdlib>
+#include <algorithm>
 using namespace std;
 const int N = 4;    // the number of P2~PN
 const int SIZE = 3; // every party has the same size of data
 
-int main()
+void execute()
 {
     // initialize Elgamal protocol
     Elgamal elgamal;
     elg_pk PK = elgamal.pk;
     elg_sk SK = elgamal.sk;
 
-    // TODO: get the fragment of elgamal secret key
+    // get the fragment of elgamal secret key
     gmp_randstate_t grt;
     gmp_randinit_default(grt);
     gmp_randseed_ui(grt, clock());
@@ -109,7 +114,7 @@ int main()
     }
     printf("\n");
 
-    // TODO: P1 get the result
+    // P1 get the result
     mpz_invert(deno, deno, PK.p);
     for (int i = 0; i < SIZE; i++)
     {
@@ -122,6 +127,60 @@ int main()
         gmp_printf("%Zd\t", c[i]);
     }
     printf("\n\n");
+}
 
+void write_file(string data, string file_path)
+{
+    ofstream outfile(file_path);
+    if (!outfile.is_open())
+    {
+        cerr << "error" << endl;
+    }
+    outfile << data;
+    outfile.close();
+}
+
+void gen_data()
+{
+    gmp_randstate_t grt;
+    gmp_randinit_default(grt);
+    gmp_randseed_ui(grt, clock());
+    srand((unsigned)time(NULL));
+
+    int num = 1 << 10;
+
+    vector<int> idx;
+    for (int i = 0; i < 64; i++)
+    {
+        idx.push_back(rand() % num);
+    }
+    sort(idx.begin(), idx.end());
+
+    string data = "";
+
+    int it = 0;
+    for (int i = 0; i < num; i++)
+    {
+        if (idx[it] == i)
+        {
+            data += "123456\n";
+            it++;
+            continue;
+        }
+        mpz_t temp;
+        mpz_init(temp);
+        mpz_urandomb(temp, grt, 30);
+        data += string(mpz_get_str(NULL, 10, temp));
+        data += "\n";
+
+        mpz_clear(temp);
+    }
+
+    write_file(data, "../data/Server.txt");
+}
+
+int main()
+{
+    gen_data();
     return 0;
 }
