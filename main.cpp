@@ -5,12 +5,30 @@
 #include <fstream>
 #include <cstdlib>
 #include <algorithm>
+#include <cassert>
 #include <set>
 using namespace std;
-const int N = 4;    // the number of P2~PN
-const int SIZE = 3; // every party has the same size of data
 
-void execute()
+void read_file(vector<mpz_t> &data, string file_path)
+{
+    ifstream infile(file_path);
+    assert(infile.is_open());
+    string line;
+    while (getline(infile, line))
+    {
+        cout << line << endl;
+    }
+
+    infile.close();
+}
+
+/**
+ * @brief To execute our protocol
+ *
+ * @param N The number of P2~PN
+ * @param SIZE The size of data, you can choose from {10,16,20}
+ */
+void execute(const int N, const int SIZE)
 {
     // initialize Elgamal protocol
     Elgamal elgamal;
@@ -33,6 +51,7 @@ void execute()
     }
     mpz_init(s[0]);
     mpz_sub(s[0], SK.s, cnt);
+    mpz_clear(cnt);
 
     // initialize P1
     int temp[SIZE] = {4, 2, 3};
@@ -188,5 +207,6 @@ string gen_data()
 
 int main()
 {
-    
+    vector<mpz_t> a(3);
+    read_file(a, "../data/num10/Server.txt");
 }
