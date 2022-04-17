@@ -62,20 +62,10 @@ void execute(const int N, const int SIZE)
     // initialize P2~PN
     vector<Client *> P2N;
 
-    mpz_t MAX;
-    mpz_init_set_si(MAX, 10);
-
-    printf("P2N's data is :\n");
-    for (int i = 0; i < N; i++)
+    for (int i = 1; i <= N; i++)
     {
-        vector<mpz_t> y(SIZE);
-        for (int j = 0; j < SIZE; j++)
-        {
-            mpz_init(y[j]);
-            mpz_urandomm(y[j], grt, MAX);
-            gmp_printf("%Zd\t", y[j]);
-        }
-        printf("\n");
+        vector<mpz_t> y(_SIZE);
+        read_file(y, string("../data/num" + to_string(SIZE) + "/Client" + to_string(i) + ".txt"));
         P2N.push_back(new Client(y, PK.p));
     }
 
@@ -204,5 +194,5 @@ string gen_data()
 
 int main()
 {
-    execute(3, 10);
+    return 0;
 }

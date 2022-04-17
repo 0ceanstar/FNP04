@@ -14,17 +14,17 @@ void Poly::_get_co(vector<bool> &vis, int cur, int j, mpz_t &t)
             if (!vis[i])
             {
                 mpz_mul(pro, pro, x[i]);
-                mpz_mod(pro, pro, p); //有待考察
+                mpz_mod(pro, pro, p);
             }
         }
         //将剩下的直接相乘
         for (int i = cur; i < kc; i++)
         {
             mpz_mul(pro, pro, x[i]);
-            mpz_mod(pro, pro, p); //有待考察
+            mpz_mod(pro, pro, p);
         }
         mpz_add(t, t, pro);
-        mpz_mod(t, t, p); //有待考察
+        mpz_mod(t, t, p);
         return;
     }
     if (cur == kc)
@@ -49,30 +49,41 @@ Poly::Poly(vector<mpz_t> &x, mpz_t mod) : kc(x.size()), x(kc)
     }
 }
 
-void Poly::get_co(vector<mpz_t> &a)
+void Poly::get_co(vector<mpz_t> &a, int mod)
 {
-    //遍历计算每个系数，a0需要单独计算
-    // a0等于所有x的累积
+    if (mod == 0) // recursion
+    {
+        //遍历计算每个系数，a0需要单独计算
+        // a0等于所有x的累积
+        mpz_init_set_ui(a[0], 1);
+        for (int i = 0; i < kc; i++)
+        {
+            mpz_mul(a[0], a[0], x[i]);
+        }
+        //对于每一项系数aj，从kc个数里面选出j个，然后累乘剩余所有的项，得到Cjkc个数字，累加它们得到aj的绝对值，
+        // aj的符号，从a0开始，a0为正，a1为负，a2为正......
+        bool flag = 1;        // flag=1为负，第一项是a1，所以为负
+        vector<bool> vis(kc); // vis为1则该项不参与此轮计算
+        for (int j = 1; j <= kc; j++)
+        {
+            mpz_t &cur = a[j];
+            mpz_init_set_ui(cur, 0);
+            fill(vis.begin(), vis.end(), false);
+            _get_co(vis, 0, j, cur);
+            if (flag)
+            {
+                mpz_neg(cur, cur);
+            }
+            flag = !flag;
+        }
+        return;
+    }
+
+    // TODO: implement the iteration method
     mpz_init_set_ui(a[0], 1);
     for (int i = 0; i < kc; i++)
     {
         mpz_mul(a[0], a[0], x[i]);
-    }
-    //对于每一项系数aj，从kc个数里面选出j个，然后累乘剩余所有的项，得到Cjkc个数字，累加它们得到aj的绝对值，
-    // aj的符号，从a0开始，a0为正，a1为负，a2为正......
-    bool flag = 1;        // flag=1为负，第一项是a1，所以为负
-    vector<bool> vis(kc); // vis为1则该项不参与此轮计算
-    for (int j = 1; j <= kc; j++)
-    {
-        mpz_t &cur = a[j];
-        mpz_init_set_ui(cur, 0);
-        fill(vis.begin(), vis.end(), false);
-        _get_co(vis, 0, j, cur);
-        if (flag)
-        {
-            mpz_neg(cur, cur);
-        }
-        flag = !flag;
     }
 }
 
@@ -133,12 +144,12 @@ void Poly::sample()
     }
 }
 
-void Poly::set_mod(mpz_t &mod)
+void Poly::set_p(mpz_t &mod)
 {
     mpz_init_set(p, mod);
 }
 
-void Poly::get_mod(mpz_t &mod)
+void Poly::get_p(mpz_t &mod)
 {
     mpz_init_set(mod, this->p);
 }
