@@ -13,12 +13,12 @@ void read_file(vector<mpz_t> &data, string file_path)
 {
     ifstream infile(file_path);
     assert(infile.is_open());
-    string line;
+    string line = "";
+    int k = 0;
     while (getline(infile, line))
     {
-        cout << line << endl;
+        mpz_init_set_str(data[k++], line.c_str(), 10);
     }
-
     infile.close();
 }
 
@@ -54,12 +54,9 @@ void execute(const int N, const int SIZE)
     mpz_clear(cnt);
 
     // initialize P1
-    int temp[SIZE] = {4, 2, 3};
-    vector<mpz_t> m(SIZE);
-    for (int i = 0; i < SIZE; i++)
-    {
-        mpz_init_set_si(m[i], temp[i]);
-    }
+    int _SIZE = (1 << SIZE);
+    vector<mpz_t> m(_SIZE);
+    read_file(m, string("../data/num" + to_string(SIZE) + "/Server.txt"));
     Server P1(m, PK.p);
 
     // initialize P2~PN
@@ -207,6 +204,5 @@ string gen_data()
 
 int main()
 {
-    vector<mpz_t> a(3);
-    read_file(a, "../data/num10/Server.txt");
+    execute(3, 10);
 }
