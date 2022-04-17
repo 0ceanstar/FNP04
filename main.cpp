@@ -5,6 +5,7 @@
 #include <fstream>
 #include <cstdlib>
 #include <algorithm>
+#include <set>
 using namespace std;
 const int N = 4;    // the number of P2~PN
 const int SIZE = 3; // every party has the same size of data
@@ -140,28 +141,27 @@ void write_file(string data, string file_path)
     outfile.close();
 }
 
-void gen_data()
+string gen_data()
 {
     gmp_randstate_t grt;
     gmp_randinit_default(grt);
     gmp_randseed_ui(grt, clock());
-    srand((unsigned)time(NULL));
+    srand(clock());
 
-    int num = 1 << 10;
+    int num = 1 << 20;
 
-    vector<int> idx;
-    for (int i = 0; i < 64; i++)
+    set<int> idx;
+    while (idx.size() != 64)
     {
-        idx.push_back(rand() % num);
+        idx.insert(rand() % num);
     }
-    sort(idx.begin(), idx.end());
 
     string data = "";
 
-    int it = 0;
+    set<int>::iterator it = idx.begin();
     for (int i = 0; i < num; i++)
     {
-        if (idx[it] == i)
+        if ((*it) == i)
         {
             data += "123456\n";
             it++;
@@ -176,11 +176,17 @@ void gen_data()
         mpz_clear(temp);
     }
 
-    write_file(data, "../data/Server.txt");
+    // for (int i = 1; i <= 16; i++)
+    // {
+    //     string file_path = "../data/num20/Client" + to_string(i) + ".txt";
+    //     write_file(gen_data(), file_path);
+    // }
+    // write_file(gen_data(), "../data/num20/Server.txt");
+
+    return data;
 }
 
 int main()
 {
-    gen_data();
-    return 0;
+    
 }
