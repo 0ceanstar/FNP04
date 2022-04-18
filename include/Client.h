@@ -2,6 +2,9 @@
 #include "Elgamal.h"
 #include "Poly.h"
 #include <vector>
+#include <iostream>
+#include <fstream>
+#include <cassert>
 
 class Client
 {
@@ -29,6 +32,10 @@ public:
      */
     void init(std::vector<mpz_t> &x);
 
+    void get_co();
+
+    void show_co();
+
     void get_enc_co(mpz_t &enc_co_1,
                     std::vector<mpz_t> &enc_co_2,
                     elg_pk pk,
@@ -36,11 +43,12 @@ public:
 
     /**
      * @brief Set the data and initialize, this function must be called after set_p
-     * 
-     * @param x 
+     *
+     * @param x
      */
     void set_data(vector<mpz_t> &x);
 
-
     void set_p(mpz_t &p);
+
+    static void sample();
 };

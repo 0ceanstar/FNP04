@@ -40,9 +40,9 @@ void Poly::_get_co(vector<bool> &vis, int cur, int j, mpz_t &t)
     _get_co(vis, cur + 1, j, t);
 }
 
-Poly::Poly(vector<mpz_t> &x, mpz_t mod) : kc(x.size()), x(kc)
+Poly::Poly(vector<mpz_t> &x, mpz_t p) : kc(x.size()), x(kc)
 {
-    mpz_init_set(p, mod); //默认的模数，这里是随便设置的
+    mpz_init_set(this->p, p);
     for (int i = 0; i < kc; i++)
     {
         mpz_init_set(this->x[i], x[i]);
@@ -59,6 +59,7 @@ void Poly::get_co(vector<mpz_t> &a, int mod)
         for (int i = 0; i < kc; i++)
         {
             mpz_mul(a[0], a[0], x[i]);
+            mpz_mod(a[0], a[0], p);
         }
         //对于每一项系数aj，从kc个数里面选出j个，然后累乘剩余所有的项，得到Cjkc个数字，累加它们得到aj的绝对值，
         // aj的符号，从a0开始，a0为正，a1为负，a2为正......
@@ -79,11 +80,41 @@ void Poly::get_co(vector<mpz_t> &a, int mod)
         return;
     }
 
-    // TODO: implement the iteration method
+    // calculate a[0] separately
+    // FIXME: do not complete
     mpz_init_set_ui(a[0], 1);
     for (int i = 0; i < kc; i++)
     {
         mpz_mul(a[0], a[0], x[i]);
+        mpz_mod(a[0], a[0], p);
+    }
+
+    for (int i = 1; i <= kc; i++)
+    {
+        // initialize current coefficient
+        mpz_init_set_ui(a[i], 0);
+        mpz_t &cur = a[i];
+        vector<bool> vis(kc);
+        stack<pair<int, int>> stk; // store the number of 1
+        fill(vis.begin(), vis.end(), false);
+        stk.push({0, 0});
+
+        int pos = 0;
+        int cnt = 0;
+        while ((pos < kc && cnt < i) || !stk.empty())
+        {
+            while ((pos < kc && cnt < i))
+            {
+                vis[pos] = 1;
+                pos++;
+                cnt++;
+                stk.push({pos, cnt});
+            }
+            if (!stk.empty())
+            {
+                pair<int, int> top = stk.top();
+            }
+        }
     }
 }
 

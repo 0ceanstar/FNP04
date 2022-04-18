@@ -15,17 +15,21 @@ void Client::init(vector<mpz_t> &x)
     {
         mpz_init_set(this->x[i], x[i]);
     }
+}
 
+void Client::get_co()
+{
     Poly poly(this->x, p);
-
     poly.get_co(a);
+}
 
-    // printf("The coefficient of polynomial is :\n");
-    // for (int i = 0; i < kc + 1; i++)
-    // {
-    //     gmp_printf("%Zd\t", a[i]);
-    // }
-    // printf("\n");
+void Client::show_co()
+{
+    printf("The coefficient is:\n\n");
+    for (int i = 0; i < kc + 1; i++)
+    {
+        gmp_printf("%Zd\n\n", a[i]);
+    }
 }
 
 void Client::get_enc_co(mpz_t &enc_co_1,
@@ -48,4 +52,27 @@ void Client::set_data(vector<mpz_t> &x)
 void Client::set_p(mpz_t &p)
 {
     mpz_init_set(this->p, p);
+}
+
+void Client::sample()
+{
+    ifstream infile("../data/num5/Client1.txt");
+    assert(infile.is_open());
+    string line = "";
+    vector<mpz_t> data(16);
+    int k = 0;
+    while (k < 16 && getline(infile, line))
+    {
+        mpz_init_set_str(data[k++], line.c_str(), 10);
+    }
+    mpz_t p;
+    Elgamal el;
+    mpz_init_set(p, el.pk.p);
+    Client client(data, p);
+
+    client.get_co();
+
+    client.show_co();
+
+    infile.close();
 }

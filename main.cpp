@@ -26,7 +26,7 @@ void read_file(vector<mpz_t> &data, string file_path)
  * @brief To execute our protocol
  *
  * @param N The number of P2~PN
- * @param SIZE The size of data, you can choose from {10,16,20}
+ * @param SIZE The size of data, you can choose from {8,10,16,20}
  */
 void execute(const int N, const int SIZE)
 {
@@ -67,6 +67,11 @@ void execute(const int N, const int SIZE)
         vector<mpz_t> y(_SIZE);
         read_file(y, string("../data/num" + to_string(SIZE) + "/Client" + to_string(i) + ".txt"));
         P2N.push_back(new Client(y, PK.p));
+    }
+
+    for (Client *each : P2N)
+    {
+        each->get_co();
     }
 
     // P1's ecrypted value
@@ -147,14 +152,14 @@ void write_file(string data, string file_path)
     outfile.close();
 }
 
-string gen_data()
+string gen_data(int t)
 {
     gmp_randstate_t grt;
     gmp_randinit_default(grt);
     gmp_randseed_ui(grt, clock());
     srand(clock());
 
-    int num = 1 << 20;
+    int num = 1 << t;
 
     set<int> idx;
     while (idx.size() != 64)
@@ -182,17 +187,22 @@ string gen_data()
         mpz_clear(temp);
     }
 
+    // Put following code to main function to generate data
+    // int t = 5;
     // for (int i = 1; i <= 16; i++)
     // {
-    //     string file_path = "../data/num20/Client" + to_string(i) + ".txt";
-    //     write_file(gen_data(), file_path);
+    //     string file_path = "../data/num" + to_string(t) + "/Client" + to_string(i) + ".txt";
+    //     write_file(gen_data(t), file_path);
     // }
-    // write_file(gen_data(), "../data/num20/Server.txt");
-
+    // write_file(gen_data(t), "../data/num" + to_string(t) + "/Server.txt");
     return data;
 }
 
 int main()
 {
+    // execute(3, 5);
+
+    Client::sample();
+
     return 0;
 }

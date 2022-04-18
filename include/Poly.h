@@ -2,6 +2,7 @@
 #include <iostream>
 #include <gmp.h>
 #include <vector>
+#include <stack>
 #include <algorithm>
 
 using namespace std;
@@ -16,7 +17,7 @@ public:
      *
      *
      * @param a
-     * @param p p = 0 ---> recursion; p =1 ---> iteration
+     * @param mod p = 0 ---> recursion; p =1 ---> iteration
      */
     void get_co(vector<mpz_t> &a, int mod = 0);
 
@@ -34,6 +35,6 @@ public:
 private:
     int kc; // the size of set x
     vector<mpz_t> x;
-    mpz_t p; // the p number
+    mpz_t p;
     void _get_co(vector<bool> &vis, int cur, int j, mpz_t &t);
 };
