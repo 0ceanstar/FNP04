@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Client.cpp.o.d"
   "CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Elgamal.cpp.o"
   "CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Elgamal.cpp.o.d"
+  "CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/LGLR.cpp.o"
+  "CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/LGLR.cpp.o.d"
   "CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Poly.cpp.o"
   "CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Poly.cpp.o.d"
   "CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Server.cpp.o"

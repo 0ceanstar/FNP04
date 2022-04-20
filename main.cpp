@@ -1,5 +1,6 @@
 #include "Client.h"
 #include "Server.h"
+#include "LGLR.h"
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -201,8 +202,6 @@ string gen_data(int t)
 int main()
 {
     // execute(3, 5);
-
-    Client::sample();
-
+    LGLR::sample();
     return 0;
 }

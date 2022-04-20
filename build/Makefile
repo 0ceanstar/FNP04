@@ -201,6 +201,30 @@ home/rfli/Desktop/CppSource/FNP04/src/Elgamal.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Elgamal.cpp.s
 .PHONY : home/rfli/Desktop/CppSource/FNP04/src/Elgamal.cpp.s
 
+home/rfli/Desktop/CppSource/FNP04/src/LGLR.o: home/rfli/Desktop/CppSource/FNP04/src/LGLR.cpp.o
+.PHONY : home/rfli/Desktop/CppSource/FNP04/src/LGLR.o
+
+# target to build an object file
+home/rfli/Desktop/CppSource/FNP04/src/LGLR.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/LGLR.cpp.o
+.PHONY : home/rfli/Desktop/CppSource/FNP04/src/LGLR.cpp.o
+
+home/rfli/Desktop/CppSource/FNP04/src/LGLR.i: home/rfli/Desktop/CppSource/FNP04/src/LGLR.cpp.i
+.PHONY : home/rfli/Desktop/CppSource/FNP04/src/LGLR.i
+
+# target to preprocess a source file
+home/rfli/Desktop/CppSource/FNP04/src/LGLR.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/LGLR.cpp.i
+.PHONY : home/rfli/Desktop/CppSource/FNP04/src/LGLR.cpp.i
+
+home/rfli/Desktop/CppSource/FNP04/src/LGLR.s: home/rfli/Desktop/CppSource/FNP04/src/LGLR.cpp.s
+.PHONY : home/rfli/Desktop/CppSource/FNP04/src/LGLR.s
+
+# target to generate assembly for a file
+home/rfli/Desktop/CppSource/FNP04/src/LGLR.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/LGLR.cpp.s
+.PHONY : home/rfli/Desktop/CppSource/FNP04/src/LGLR.cpp.s
+
 home/rfli/Desktop/CppSource/FNP04/src/Poly.o: home/rfli/Desktop/CppSource/FNP04/src/Poly.cpp.o
 .PHONY : home/rfli/Desktop/CppSource/FNP04/src/Poly.o
 
@@ -291,6 +315,9 @@ help:
 	@echo "... home/rfli/Desktop/CppSource/FNP04/src/Elgamal.o"
 	@echo "... home/rfli/Desktop/CppSource/FNP04/src/Elgamal.i"
 	@echo "... home/rfli/Desktop/CppSource/FNP04/src/Elgamal.s"
+	@echo "... home/rfli/Desktop/CppSource/FNP04/src/LGLR.o"
+	@echo "... home/rfli/Desktop/CppSource/FNP04/src/LGLR.i"
+	@echo "... home/rfli/Desktop/CppSource/FNP04/src/LGLR.s"
 	@echo "... home/rfli/Desktop/CppSource/FNP04/src/Poly.o"
 	@echo "... home/rfli/Desktop/CppSource/FNP04/src/Poly.i"
 	@echo "... home/rfli/Desktop/CppSource/FNP04/src/Poly.s"
