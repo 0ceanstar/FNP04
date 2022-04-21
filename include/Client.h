@@ -24,6 +24,7 @@ public:
     Client(std::vector<mpz_t> &x, mpz_t &p);
 
     Client();
+    ~Client();
 
     /**
      * @brief initialize the data x, and get the coefficient of polynomial

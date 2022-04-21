@@ -73,6 +73,7 @@ void execute(const int N, const int SIZE)
     for (Client *each : P2N)
     {
         each->get_co();
+        // each->show_co();
     }
 
     // P1's ecrypted value
@@ -89,6 +90,7 @@ void execute(const int N, const int SIZE)
         // P2~PN generate the polynomials respectively
         Client &cur = *P2N[i];
         mpz_t enc_co_1;
+        mpz_init(enc_co_1);
         vector<mpz_t> enc_co_2(SIZE + 1);
         mpz_t k;
         mpz_init(k);
@@ -153,7 +155,7 @@ void write_file(string data, string file_path)
     outfile.close();
 }
 
-string gen_data(int t)
+string _gen_data(int t)
 {
     gmp_randstate_t grt;
     gmp_randinit_default(grt);
@@ -188,20 +190,28 @@ string gen_data(int t)
         mpz_clear(temp);
     }
 
-    // Put following code to main function to generate data
-    // int t = 5;
-    // for (int i = 1; i <= 16; i++)
-    // {
-    //     string file_path = "../data/num" + to_string(t) + "/Client" + to_string(i) + ".txt";
-    //     write_file(gen_data(t), file_path);
-    // }
-    // write_file(gen_data(t), "../data/num" + to_string(t) + "/Server.txt");
     return data;
+}
+
+/**
+ * @brief To generate data
+ *
+ * @param t t > 6
+ * @return string
+ */
+void gen_data(int n)
+{
+    int t = n;
+    for (int i = 1; i <= 16; i++)
+    {
+        string file_path = "../data/num" + to_string(t) + "/Client" + to_string(i) + ".txt";
+        write_file(_gen_data(t), file_path);
+    }
+    write_file(_gen_data(t), "../data/num" + to_string(t) + "/Server.txt");
 }
 
 int main()
 {
-    // execute(3, 5);
-    LGLR::sample();
+    execute(1, 10);
     return 0;
 }

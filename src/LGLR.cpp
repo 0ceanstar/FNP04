@@ -37,14 +37,14 @@ LGLR::LGLR(vector<mpz_t> &x, mpz_t p)
     mpz_clear(t);
     mpz_clear(x1);
 
-    printf("x = ");
-    for (int i = 1; i <= n; i++)
-    {
-        gmp_printf("%Zd\t", this->x[i]);
-    }
-    printf("\n\n");
+    // printf("x = ");
+    // for (int i = 1; i <= n; i++)
+    // {
+    //     gmp_printf("%Zd\t", this->x[i]);
+    // }
+    // printf("\n\n");
 
-    gmp_printf("y1 = %Zd\n\n", y1);
+    // gmp_printf("y1 = %Zd\n\n", y1);
 
     init();
 }
@@ -59,7 +59,7 @@ LGLR::~LGLR()
     mpz_clear(p);
 }
 
-void LGLR::mul(vector<mpz_t> &f, int len, mpz_t t)
+void LGLR::mul(vector<mpz_t> &f, int len, mpz_t& t)
 {
     for (int i = len; i > 0; i--)
     {
@@ -108,9 +108,16 @@ void LGLR::init()
     mpz_init(t);
     for (int i = 2; i <= n; i++)
     {
-        mpz_set(t, x[i]);
-        mpz_neg(t, t);
-        mul(b, i, t);
+        try
+        {
+            mpz_set(t, x[i]);
+            mpz_neg(t, t);
+            mul(b, i, t);
+        }
+        catch (const std::exception &e)
+        {
+            std::cout << "Caught exception \"" << e.what() << "\"\n";
+        }
     }
     mpz_clear(t);
 
@@ -150,6 +157,7 @@ void LGLR::init()
             mpz_add(a[j], a[j], q);
             mpz_mod(a[j], a[j], p);
         }
+        mpz_clear(fz);
     }
     mpz_clear(q);
 }

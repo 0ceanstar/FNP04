@@ -27,14 +27,14 @@ private:
     // To initialize all data, and get the result
     void init();
 
-    void mul(std::vector<mpz_t> &f, int len, mpz_t t);
+    void mul(std::vector<mpz_t> &f, int len, mpz_t& t);
 
     void dev(std::vector<mpz_t> &f, std::vector<mpz_t> &r, mpz_t t);
 
 public:
     LGLR(std::vector<mpz_t> &x, mpz_t p);
 
-    // TODO: do not forget to free the useless space
+    // do not forget to free the useless space
     ~LGLR();
 
     void get_co(std::vector<mpz_t> &a);

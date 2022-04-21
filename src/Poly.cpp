@@ -80,42 +80,9 @@ void Poly::get_co(vector<mpz_t> &a, int mod)
         return;
     }
 
-    // calculate a[0] separately
-    // FIXME: do not complete
-    mpz_init_set_ui(a[0], 1);
-    for (int i = 0; i < kc; i++)
-    {
-        mpz_mul(a[0], a[0], x[i]);
-        mpz_mod(a[0], a[0], p);
-    }
-
-    for (int i = 1; i <= kc; i++)
-    {
-        // initialize current coefficient
-        mpz_init_set_ui(a[i], 0);
-        mpz_t &cur = a[i];
-        vector<bool> vis(kc);
-        stack<pair<int, int>> stk; // store the number of 1
-        fill(vis.begin(), vis.end(), false);
-        stk.push({0, 0});
-
-        int pos = 0;
-        int cnt = 0;
-        while ((pos < kc && cnt < i) || !stk.empty())
-        {
-            while ((pos < kc && cnt < i))
-            {
-                vis[pos] = 1;
-                pos++;
-                cnt++;
-                stk.push({pos, cnt});
-            }
-            if (!stk.empty())
-            {
-                pair<int, int> top = stk.top();
-            }
-        }
-    }
+    // use LGLR to calculate the coefficient
+    LGLR lglr(x, p);
+    lglr.get_co(a);
 }
 
 void Poly::get_co(vector<mpz_t> &a, const vector<mpz_t> &x)

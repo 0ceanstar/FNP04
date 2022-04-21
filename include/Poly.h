@@ -4,6 +4,7 @@
 #include <vector>
 #include <stack>
 #include <algorithm>
+#include "LGLR.h"
 
 using namespace std;
 

@@ -19,6 +19,8 @@ class Elgamal
 public:
     Elgamal();
 
+    ~Elgamal();
+
     /**
      * @brief Get the elgamal public key
      *

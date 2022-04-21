@@ -158,4 +158,6 @@ CMakeFiles/main.dir/home/rfli/Desktop/CppSource/FNP04/src/Poly.cpp.o: \
  /usr/include/c++/9/bits/stl_algo.h \
  /usr/include/c++/9/bits/algorithmfwd.h \
  /usr/include/c++/9/bits/stl_heap.h /usr/include/c++/9/bits/stl_tempbuf.h \
- /usr/include/c++/9/bits/uniform_int_dist.h /usr/include/c++/9/limits
+ /usr/include/c++/9/bits/uniform_int_dist.h /usr/include/c++/9/limits \
+ /home/rfli/Desktop/CppSource/FNP04/build/../include/LGLR.h \
+ /home/rfli/Desktop/CppSource/FNP04/build/../include/Elgamal.h

@@ -9,6 +9,16 @@ Client::Client()
 {
 }
 
+Client::~Client()
+{
+    for (int i = 0; i < kc; i++)
+    {
+        mpz_clear(x[i]);
+        mpz_clear(a[i]);
+    }
+    mpz_clear(a[kc]);
+}
+
 void Client::init(vector<mpz_t> &x)
 {
     for (int i = 0; i < kc; i++)
@@ -20,7 +30,10 @@ void Client::init(vector<mpz_t> &x)
 void Client::get_co()
 {
     Poly poly(this->x, p);
-    poly.get_co(a);
+    if (kc < 30)
+        poly.get_co(a);
+    else
+        poly.get_co(a, 1);
 }
 
 void Client::show_co()
@@ -39,6 +52,7 @@ void Client::get_enc_co(mpz_t &enc_co_1,
 {
     for (int i = 0; i < a.size(); i++)
     {
+        printf("i = %d\n", i);
         Elgamal::elg_enc(enc_co_1, enc_co_2[i], a[i], pk, k);
     }
 }
