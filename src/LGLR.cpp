@@ -2,59 +2,192 @@
 using namespace std;
 
 LGLR::LGLR(vector<mpz_t> &x, mpz_t p)
-    : n(x.size() + 1), a(n), x(n + 1), c(n + 1), temp(n + 1), y(n + 1)
+    : n(x.size() + 1), a(n + 1), x(n + 1), b(n + 1), temp(n + 1), c(n + 1)
 {
     mpz_init_set(this->p, p);
+    for (int i = 0; i < n - 1; i++)
+    {
+        mpz_init_set(this->x[i + 2], x[i]);
+    }
 
     mpz_t x1;
     mpz_init(x1);
-    mpz_t y1;
     mpz_init(y1);
 
     gmp_randinit_default(grt);
     gmp_randseed_ui(grt, clock());
 
+    mpz_t t;
+    mpz_init(t);
     do
     {
-        // FIXME: to generate x1 and y1
-    } while (0 != mpz_cmp_si(y1, 0));
+        mpz_urandomm(x1, grt, p);
+        mpz_init_set_si(y1, 1);
 
-    for (int i = 2; i <= n; i++)
+        for (int i = 2; i <= n; i++)
+        {
+            mpz_sub(t, x1, this->x[i]);
+            mpz_mul(y1, y1, t);
+            mpz_mod(y1, y1, p);
+        }
+
+    } while (0 == mpz_sgn(y1));
+
+    mpz_init_set(this->x[1], x1);
+    mpz_clear(t);
+    mpz_clear(x1);
+
+    printf("x = ");
+    for (int i = 1; i <= n; i++)
     {
-        mpz_init_set(this->x[i], x[i]);
+        gmp_printf("%Zd\t", this->x[i]);
     }
+    printf("\n\n");
+
+    gmp_printf("y1 = %Zd\n\n", y1);
 
     init();
 }
 
-void LGLR::init()
+LGLR::~LGLR()
 {
-    // TODO: main function here
+    for (int i = 0; i < n + 1; i++)
+    {
+        mpz_clears(a[i], x[i], temp[i], b[i], c[i], NULL);
+    }
+    mpz_clear(y1);
+    mpz_clear(p);
 }
 
-void LGLR::qm(mpz_t &res, mpz_t a, mpz_t b)
+void LGLR::mul(vector<mpz_t> &f, int len, mpz_t t)
 {
-    mpz_init_set_si(res, 1);
-    mpz_t aa;
-    mpz_init_set(aa, a);
-    mpz_t bb;
-    mpz_init_set(bb, b);
-    while (mpz_cmp_si(bb, 0) != 0)
+    for (int i = len; i > 0; i--)
     {
-        if (mpz_odd_p(bb))
-        {
-            mpz_mul(res, res, aa);
-            mpz_mod(res, res, p);
-        }
-        mpz_mul(aa, aa, aa);
-        mpz_mod(aa, aa, p);
-        mpz_fdiv_q_2exp(bb, bb, 1);
+        mpz_init_set(temp[i], f[i]);
+        mpz_init_set(f[i], f[i - 1]);
     }
+    mpz_init_set(temp[0], f[0]);
+    mpz_init_set_si(f[0], 0);
 
-    mpz_clear(aa);
-    mpz_clear(bb);
+    mpz_t q;
+    mpz_init(q);
+    for (int i = 0; i <= len; i++)
+    {
+        mpz_mul(q, temp[i], t);
+        mpz_add(f[i], f[i], q);
+        mpz_mod(f[i], f[i], p);
+    }
+    mpz_clear(q);
+}
+
+void LGLR::dev(std::vector<mpz_t> &f, std::vector<mpz_t> &r, mpz_t t)
+{
+    for (int i = 0; i <= n; i++)
+    {
+        mpz_init_set(temp[i], f[i]);
+    }
+    mpz_t q;
+    mpz_init(q);
+    for (int i = n; i > 0; i--)
+    {
+        mpz_init_set(r[i - 1], temp[i]);
+        mpz_mul(q, t, temp[i]);
+        mpz_sub(temp[i - 1], temp[i - 1], q);
+        mpz_mod(temp[i - 1], temp[i - 1], p);
+    }
+    mpz_clear(q);
+}
+
+void LGLR::init()
+{
+    mpz_init_set_si(b[1], 1);
+    mpz_init_set(b[0], x[1]);
+    mpz_neg(b[0], b[0]);
+
+    mpz_t t;
+    mpz_init(t);
+    for (int i = 2; i <= n; i++)
+    {
+        mpz_set(t, x[i]);
+        mpz_neg(t, t);
+        mul(b, i, t);
+    }
+    mpz_clear(t);
+
+    mpz_t q;
+    mpz_init(q);
+    for (int i = 1; i <= n; i++)
+    {
+        mpz_t fz;
+        mpz_init_set_si(fz, 1);
+        for (int j = 1; j <= n; j++)
+        {
+            if (i == j)
+            {
+                continue;
+            }
+            mpz_sub(q, x[i], x[j]);
+            mpz_mul(fz, fz, q);
+            mpz_mod(fz, fz, p);
+        }
+        if (i == 1)
+        {
+            mpz_sub_ui(q, p, 2);
+            mpz_powm(fz, fz, q, p);
+            mpz_mul(fz, fz, y1);
+        }
+        else
+        {
+            mpz_set_si(fz, 0);
+        }
+        mpz_mod(fz, fz, p);
+        mpz_init_set(q, x[i]);
+        mpz_neg(q, q);
+        dev(b, c, q);
+        for (int j = 0; j < n; j++)
+        {
+            mpz_mul(q, fz, c[j]);
+            mpz_add(a[j], a[j], q);
+            mpz_mod(a[j], a[j], p);
+        }
+    }
+    mpz_clear(q);
+}
+void LGLR::get_co(std::vector<mpz_t> &a)
+{
+    for (int i = 0; i < n; i++)
+    {
+        mpz_init_set(a[i], this->a[i]);
+    }
 }
 
 void LGLR::sample()
 {
+    Elgamal el;
+    mpz_t p;
+    mpz_init_set(p, el.pk.p);
+
+    int n = 3;
+    vector<mpz_t> x(n);
+    mpz_init_set_ui(x[0], 4);
+    mpz_init_set_ui(x[1], 2);
+    mpz_init_set_ui(x[2], 3);
+
+    LGLR lglr(x, p);
+
+    vector<mpz_t> a(4);
+
+    lglr.get_co(a);
+
+    printf("a = ");
+    for (int i = 0; i < n; i++)
+    {
+        if (mpz_cmp_si(a[i], 1000) > 0)
+        {
+            mpz_sub(a[i], a[i], p);
+        }
+
+        gmp_printf("%Zd\t", a[i]);
+    }
+    printf("\n\n");
 }
