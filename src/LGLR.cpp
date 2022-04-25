@@ -5,6 +5,12 @@ LGLR::LGLR(vector<mpz_t> &x, mpz_t p)
     : n(x.size() + 1), a(n + 1), x(n + 1), b(n + 1), temp(n + 1), c(n + 1)
 {
     mpz_init_set(this->p, p);
+    for (int i = 0; i < n + 1; i++)
+    {
+        mpz_init(temp[i]);
+        mpz_init(c[i]);
+        mpz_init(b[i]);
+    }
     for (int i = 0; i < n - 1; i++)
     {
         mpz_init_set(this->x[i + 2], x[i]);
@@ -59,15 +65,15 @@ LGLR::~LGLR()
     mpz_clear(p);
 }
 
-void LGLR::mul(vector<mpz_t> &f, int len, mpz_t& t)
+void LGLR::mul(vector<mpz_t> &f, int len, mpz_t &t)
 {
     for (int i = len; i > 0; i--)
     {
-        mpz_init_set(temp[i], f[i]);
-        mpz_init_set(f[i], f[i - 1]);
+        mpz_set(temp[i], f[i]);
+        mpz_set(f[i], f[i - 1]);
     }
-    mpz_init_set(temp[0], f[0]);
-    mpz_init_set_si(f[0], 0);
+    mpz_set(temp[0], f[0]);
+    mpz_set_si(f[0], 0);
 
     mpz_t q;
     mpz_init(q);
@@ -84,13 +90,13 @@ void LGLR::dev(std::vector<mpz_t> &f, std::vector<mpz_t> &r, mpz_t t)
 {
     for (int i = 0; i <= n; i++)
     {
-        mpz_init_set(temp[i], f[i]);
+        mpz_set(temp[i], f[i]);
     }
     mpz_t q;
     mpz_init(q);
     for (int i = n; i > 0; i--)
     {
-        mpz_init_set(r[i - 1], temp[i]);
+        mpz_set(r[i - 1], temp[i]);
         mpz_mul(q, t, temp[i]);
         mpz_sub(temp[i - 1], temp[i - 1], q);
         mpz_mod(temp[i - 1], temp[i - 1], p);
@@ -113,6 +119,7 @@ void LGLR::init()
             mpz_set(t, x[i]);
             mpz_neg(t, t);
             mul(b, i, t);
+            // printf("i = %d is done.\n", i);
         }
         catch (const std::exception &e)
         {
@@ -123,10 +130,11 @@ void LGLR::init()
 
     mpz_t q;
     mpz_init(q);
+    mpz_t fz;
+    mpz_init(fz);
     for (int i = 1; i <= n; i++)
     {
-        mpz_t fz;
-        mpz_init_set_si(fz, 1);
+        mpz_set_si(fz, 1);
         for (int j = 1; j <= n; j++)
         {
             if (i == j)
@@ -148,7 +156,7 @@ void LGLR::init()
             mpz_set_si(fz, 0);
         }
         mpz_mod(fz, fz, p);
-        mpz_init_set(q, x[i]);
+        mpz_set(q, x[i]);
         mpz_neg(q, q);
         dev(b, c, q);
         for (int j = 0; j < n; j++)
@@ -157,9 +165,10 @@ void LGLR::init()
             mpz_add(a[j], a[j], q);
             mpz_mod(a[j], a[j], p);
         }
-        mpz_clear(fz);
+        // printf("i = %d is done. \n", i);
     }
     mpz_clear(q);
+    mpz_clear(fz);
 }
 void LGLR::get_co(std::vector<mpz_t> &a)
 {
@@ -187,8 +196,8 @@ void LGLR::sample()
 
     lglr.get_co(a);
 
-    printf("a = ");
-    for (int i = 0; i < n; i++)
+    printf("a = \n");
+    for (int i = 0; i < n + 1; i++)
     {
         if (mpz_cmp_si(a[i], 1000) > 0)
         {

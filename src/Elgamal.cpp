@@ -87,7 +87,7 @@ void Elgamal::elg_enc(mpz_t &c1,
                       elg_pk pk,
                       mpz_t k)
 {
-    mpz_inits(c1, c2, NULL);
+    // mpz_inits(c1, c2, NULL);
 
     mpz_t temp;
     mpz_init(temp);
@@ -96,7 +96,7 @@ void Elgamal::elg_enc(mpz_t &c1,
     mpz_mul(c2, temp, m);        // c2=m*(b^k) mod p
     mpz_mod(c2, c2, pk.p);
 
-    // mpz_clear(temp);
+    mpz_clear(temp);
 }
 
 void Elgamal::elg_dec(mpz_t &m,

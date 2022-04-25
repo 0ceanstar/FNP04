@@ -73,7 +73,6 @@ void execute(const int N, const int SIZE)
     for (Client *each : P2N)
     {
         each->get_co();
-        // each->show_co();
     }
 
     // P1's ecrypted value
@@ -85,13 +84,18 @@ void execute(const int N, const int SIZE)
     mpz_t deno;
     mpz_init_set_si(deno, 1);
 
+    mpz_t enc_co_1;
+    mpz_init(enc_co_1);
+    vector<mpz_t> enc_co_2(SIZE + 1);
+    for (int j = 0; j < SIZE + 1; j++)
+    {
+        mpz_init(enc_co_2[j]);
+    }
+
     for (int i = 0; i < N; i++)
     {
         // P2~PN generate the polynomials respectively
-        Client &cur = *P2N[i];
-        mpz_t enc_co_1;
-        mpz_init(enc_co_1);
-        vector<mpz_t> enc_co_2(SIZE + 1);
+
         mpz_t k;
         mpz_init(k);
         mpz_urandomb(k, grt, elgamal.MESSAGE_SPACE);
@@ -99,7 +103,7 @@ void execute(const int N, const int SIZE)
         // k must be constant value
         mpz_set_si(k, 10086);
 
-        cur.get_enc_co(enc_co_1, enc_co_2, PK, k);
+        P2N[i]->get_enc_co(enc_co_1, enc_co_2, PK, k);
 
         mpz_t temp;
         mpz_init(temp);
@@ -212,6 +216,24 @@ void gen_data(int n)
 
 int main()
 {
-    execute(1, 10);
+    // int n = 16;
+    // int SIZE = (1 << n);
+    // vector<mpz_t> y(SIZE);
+    // string file_path = "../data/num" + to_string(n) + "/Client" + to_string(1) + ".txt";
+    // cout << file_path << endl;
+    // read_file(y, file_path);
+
+    // Elgamal el;
+    // mpz_t p;
+    // mpz_init_set(p, el.pk.p);
+
+    // LGLR lglr(y, p);
+
+    // vector<mpz_t> a(SIZE + 1);
+
+    // lglr.get_co(a);
+
+    execute(2, 10);
+
     return 0;
 }

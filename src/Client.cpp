@@ -52,7 +52,7 @@ void Client::get_enc_co(mpz_t &enc_co_1,
 {
     for (int i = 0; i < a.size(); i++)
     {
-        printf("i = %d\n", i);
+        // printf("i = %d\n", i);
         Elgamal::elg_enc(enc_co_1, enc_co_2[i], a[i], pk, k);
     }
 }
