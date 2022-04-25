@@ -23,7 +23,7 @@ void Server::get_enc_data(std::vector<mpz_t> &res,
     for (int i = 0; i < ks; i++)
     {
         mpz_t &cur = res[i];
-        mpz_init_set_ui(cur, 0);
+        mpz_set_ui(cur, 0);
         for (int j = 0; j < enc_co_2.size(); j++)
         {
             mpz_t temp;

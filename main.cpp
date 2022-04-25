@@ -18,7 +18,7 @@ void read_file(vector<mpz_t> &data, string file_path)
     int k = 0;
     while (getline(infile, line))
     {
-        mpz_init_set_str(data[k++], line.c_str(), 10);
+        mpz_set_str(data[k++], line.c_str(), 10);
     }
     infile.close();
 }
@@ -29,8 +29,9 @@ void read_file(vector<mpz_t> &data, string file_path)
  * @param N The number of P2~PN
  * @param SIZE The size of data, you can choose from {8,10,16,20}
  */
-void execute(const int N, const int SIZE)
+void execute(int N, const int SIZE)
 {
+    N = N + 1; // Do not ask why, it's can make the program runable, and I know it's ridiculous
     // initialize Elgamal protocol
     Elgamal elgamal;
     elg_pk PK = elgamal.pk;
@@ -60,88 +61,88 @@ void execute(const int N, const int SIZE)
     read_file(m, string("../data/num" + to_string(SIZE) + "/Server.txt"));
     Server P1(m, PK.p);
 
-    // initialize P2~PN
-    vector<Client *> P2N;
-
-    for (int i = 1; i <= N; i++)
-    {
-        vector<mpz_t> y(_SIZE);
-        read_file(y, string("../data/num" + to_string(SIZE) + "/Client" + to_string(i) + ".txt"));
-        P2N.push_back(new Client(y, PK.p));
-    }
-
-    for (Client *each : P2N)
-    {
-        each->get_co();
-    }
-
     // P1's ecrypted value
-    vector<mpz_t> c(SIZE);
-    for (int i = 0; i < SIZE; i++)
+    vector<mpz_t> c(_SIZE);
+    for (int i = 0; i < _SIZE; i++)
     {
         mpz_init_set_si(c[i], 0);
     }
+
     mpz_t deno;
     mpz_init_set_si(deno, 1);
 
     mpz_t enc_co_1;
     mpz_init(enc_co_1);
-    vector<mpz_t> enc_co_2(SIZE + 1);
-    for (int j = 0; j < SIZE + 1; j++)
+    vector<mpz_t> enc_co_2(_SIZE + 1);
+    for (int j = 0; j < _SIZE + 1; j++)
     {
         mpz_init(enc_co_2[j]);
     }
 
-    for (int i = 0; i < N; i++)
+    vector<mpz_t> enc_data(_SIZE);
+    for (int i = 0; i < _SIZE; i++)
     {
-        // P2~PN generate the polynomials respectively
+        mpz_init(enc_data[i]);
+    }
+    vector<mpz_t> y(_SIZE);
+    for (int i = 0; i < _SIZE; i++)
+    {
+        mpz_init(y[i]);
+    }
+    mpz_t k;
+    mpz_init(k);
+    mpz_t temp;
+    mpz_init(temp);
 
-        mpz_t k;
-        mpz_init(k);
+    printf("The Server has been initialized.\n");
+
+    for (int i = 1; i <= N - 1; i++)
+    {
+        // initialize P2~PN
+
+        read_file(y, string("../data/num" + to_string(SIZE) + "/Client" + to_string(i) + ".txt"));
+        Client client(y, PK.p);
+
+        client.get_co();
+
         mpz_urandomb(k, grt, elgamal.MESSAGE_SPACE);
 
         // k must be constant value
         mpz_set_si(k, 10086);
 
-        P2N[i]->get_enc_co(enc_co_1, enc_co_2, PK, k);
+        // P2~PN generate the polynomials respectively
+        client.get_enc_co(enc_co_1, enc_co_2, PK, k);
 
-        mpz_t temp;
-        mpz_init(temp);
         mpz_powm(temp, enc_co_1, s[i], PK.p);
         mpz_mul(deno, deno, temp);
         mpz_mod(deno, deno, PK.p);
 
-        mpz_clear(temp);
-        mpz_clear(k);
-
         // P1 use polynomials to calculate data
-        vector<mpz_t> enc_data(SIZE);
+
         P1.get_enc_data(enc_data, enc_co_2);
-        printf("enc_data is :");
-        for (int j = 0; j < SIZE; j++)
+        // printf("enc_data is :");
+        for (int j = 0; j < _SIZE; j++)
         {
-            gmp_printf("%Zd\t", enc_data[j]);
+            // gmp_printf("%Zd\t", enc_data[j]);
             mpz_add(c[j], c[j], enc_data[j]);
             mpz_mod(c[j], c[j], PK.p);
         }
-        printf("\n");
+        // printf("\n");
+
+        printf("The Client%d is done.\n", i);
     }
-    printf("c is :");
-    for (int i = 0; i < SIZE; i++)
-    {
-        gmp_printf("%Zd\t", c[i]);
-    }
-    printf("\n");
+    mpz_clear(temp);
+    mpz_clear(k);
 
     // P1 get the result
     mpz_invert(deno, deno, PK.p);
-    for (int i = 0; i < SIZE; i++)
+    for (int i = 0; i < _SIZE; i++)
     {
         mpz_mul(c[i], c[i], deno);
         mpz_mod(c[i], c[i], PK.p);
     }
     printf("the result is :");
-    for (int i = 0; i < SIZE; i++)
+    for (int i = 0; i < _SIZE; i++)
     {
         gmp_printf("%Zd\t", c[i]);
     }
@@ -216,24 +217,7 @@ void gen_data(int n)
 
 int main()
 {
-    // int n = 16;
-    // int SIZE = (1 << n);
-    // vector<mpz_t> y(SIZE);
-    // string file_path = "../data/num" + to_string(n) + "/Client" + to_string(1) + ".txt";
-    // cout << file_path << endl;
-    // read_file(y, file_path);
-
-    // Elgamal el;
-    // mpz_t p;
-    // mpz_init_set(p, el.pk.p);
-
-    // LGLR lglr(y, p);
-
-    // vector<mpz_t> a(SIZE + 1);
-
-    // lglr.get_co(a);
-
-    execute(2, 10);
+    execute(16, 10);
 
     return 0;
 }
